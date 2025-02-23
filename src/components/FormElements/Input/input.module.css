@@ -1,0 +1,42 @@
+.inputContainer {
+  position: relative;
+  width: 100%;
+  max-width: 100%; /* Ensures it doesn't exceed the parent width */
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: #999;
+  transition: all 0.3s ease;
+  background: white;
+  padding: 0 4px;
+  pointer-events: none; /* Prevents interference with input clicks */
+}
+
+.input {
+  width: 100%;
+  padding: 12px 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box; /* Ensures padding is included in width */
+}
+
+.input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.active {
+  top: 0;
+  left: 10px;
+  font-size: 12px;
+  color: #000;
+  background: white;
+}
