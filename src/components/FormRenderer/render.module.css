@@ -5,3 +5,26 @@
 .m4 {
   margin: 4px;
 }
+
+.container {
+  border: 1px solid #ddd;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.container p {
+  margin: 0 auto 0.25rem;
+}
+
+.container p:first-child {
+  font-weight: bold;
+}
+
+.container p:first-child::before {
+  content: "Q. ";
+}
+
+.container p:nth-child(2)::before {
+  content: "A. ";
+}

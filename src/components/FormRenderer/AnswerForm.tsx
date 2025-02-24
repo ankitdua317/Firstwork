@@ -11,7 +11,7 @@ const AnswerForm = ({ formData }: Props) => {
       <h1 className={styles.mt0}>Submitted Form</h1>
       <div>
         {formData.map(({ id, quesTitle, value }) => (
-          <div key={id}>
+          <div className={styles.container} key={id}>
             <p>{quesTitle}</p>
             <p>{value}</p>
           </div>

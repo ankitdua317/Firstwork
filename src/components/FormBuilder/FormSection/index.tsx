@@ -28,6 +28,7 @@ const FormSection = ({
 
   return (
     <div className={styles.container}>
+      {isSaving && <AutoSaveLoader isSaving={isSaving} />}
       <CollapsibleWrapper
         question={quesTitle}
         title={"Question Title *"}
@@ -47,7 +48,6 @@ const FormSection = ({
             onChange={(val) => handleFormChange(index, "quesTitle", val)}
             error={errors[index].quesTitle}
           />
-          {isSaving && <AutoSaveLoader isSaving={isSaving} />}
         </div>
         <div className={styles.formSection}>
           <CustomSelect

@@ -133,7 +133,7 @@ export const BuilderProvider: React.FC<{ children: ReactNode }> = ({
     }, 1000);
 
     return () => clearTimeout(timeout);
-  }, [formBuilderData, isFormValid, hasUserInteracted]);
+  }, [formBuilderData, isFormValid, hasUserInteracted, setIsSaving]);
 
   return (
     <BuilderContext.Provider
