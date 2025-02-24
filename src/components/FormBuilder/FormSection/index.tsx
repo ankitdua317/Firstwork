@@ -23,12 +23,11 @@ const FormSection = ({
   min,
   max,
 }: FormSectionProps) => {
-  const { handleFormChange, errors, isSaving, deleteQuestion } =
-    useBuilderContext();
+  const { handleFormChange, errors, deleteQuestion } = useBuilderContext();
 
   return (
     <div className={styles.container}>
-      {isSaving && <AutoSaveLoader isSaving={isSaving} />}
+      <AutoSaveLoader />
       <CollapsibleWrapper
         question={quesTitle}
         title={"Question Title *"}
