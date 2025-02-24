@@ -1,4 +1,4 @@
-import { FormBuilder } from "../models/FormBuilder";
+import { FormBuilder } from "../models/Form";
 import { getLocalStorageKey } from "../utils/localStorage";
 
 const fetchQuestions = (): Promise<FormBuilder[]> => {

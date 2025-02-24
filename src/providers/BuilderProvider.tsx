@@ -1,10 +1,6 @@
 import React, { useState, ReactNode, useEffect } from "react";
 import { BuilderContext } from "../contexts/BuilderContext";
-import {
-  ErrorState,
-  FormBuilder,
-  QUESTION_TYPES_ENUM,
-} from "../models/FormBuilder";
+import { ErrorState, FormBuilder, QUESTION_TYPES_ENUM } from "../models/Form";
 import {
   NUMBER_TYPE_REQD,
   QUES_TITLE_REQD,
@@ -141,6 +137,8 @@ export const BuilderProvider: React.FC<{ children: ReactNode }> = ({
         errors,
         isFormValid,
         isSaving,
+        hasFetchedData,
+        hasUserInteracted,
       }}
     >
       {children}

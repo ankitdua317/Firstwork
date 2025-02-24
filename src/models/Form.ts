@@ -18,3 +18,7 @@ export enum QUESTION_TYPES_ENUM {
 }
 
 export type ErrorState = Partial<Record<keyof IFormBuilder, string | null>>;
+
+export interface IFormRenderer extends FormBuilder {
+  value?: string;
+}

@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { ErrorState, FormBuilder } from "../models/FormBuilder";
+import { ErrorState, FormBuilder } from "../models/Form";
 
 interface BuilderContextProps {
   formBuilderData: FormBuilder[];
@@ -12,6 +12,8 @@ interface BuilderContextProps {
   ) => void;
   isFormValid: boolean;
   isSaving: boolean;
+  hasFetchedData: boolean;
+  hasUserInteracted: boolean;
 }
 
 export const BuilderContext = createContext<BuilderContextProps | undefined>(

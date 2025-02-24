@@ -4,7 +4,7 @@ import CustomSelect from "../../FormElements/Select";
 import CustomCheckbox from "../../FormElements/Checkbox";
 import CollapsibleWrapper from "../../Collapse";
 import { NUMBER_TYPE, QUESTION_TYPES } from "../../../constants/common";
-import { FormBuilder, QUESTION_TYPES_ENUM } from "../../../models/FormBuilder";
+import { FormBuilder, QUESTION_TYPES_ENUM } from "../../../models/Form";
 import useBuilderContext from "../../../hooks/useBuilderContext";
 
 interface FormSectionProps extends FormBuilder {

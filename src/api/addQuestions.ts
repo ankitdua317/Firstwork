@@ -1,4 +1,4 @@
-import { FormBuilder } from "../models/FormBuilder";
+import { FormBuilder } from "../models/Form";
 import { setLocalStorageKey } from "../utils/localStorage";
 
 const addQuestions = (questions: FormBuilder[]) => {

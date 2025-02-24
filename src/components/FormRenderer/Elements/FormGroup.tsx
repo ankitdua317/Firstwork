@@ -1,42 +1,44 @@
 import React from "react";
 import FloatingLabelInput from "../../FormElements/Input";
-import CustomSelect from "../../FormElements/Select";
-import CustomCheckbox from "../../FormElements/Checkbox";
+import { QUESTION_TYPES_ENUM } from "../../../models/Form";
 
 interface FormGroupProps {
-  id: string;
+  id: number;
   label: string;
-  type: string;
+  type: QUESTION_TYPES_ENUM;
+  handleChange: (index: number, value: string) => void;
+  index: number;
+  helperText?: string;
+  error?: string;
+  value?: string;
 }
 
-const FormGroup: React.FC<FormGroupProps> = ({ label, type }) => {
-  const renderFields = (type: string) => {
-    switch (type) {
-      case "checkbox":
-        return (
-          <div className="form-group">
-            <CustomCheckbox
-              label="Required"
-              checked={true}
-              onChange={() => {}}
-            />
-          </div>
-        );
-      case "select":
-        return (
-          <div className="form-group">
-            <CustomSelect label={label} options={["Integer", "Float"]} />
-          </div>
-        );
-      default:
-        return (
-          <div className="form-group">
-            <FloatingLabelInput label={label} />
-          </div>
-        );
-    }
+const FormGroup: React.FC<FormGroupProps> = ({
+  label,
+  type,
+  handleChange,
+  index,
+  helperText,
+  error,
+  value,
+}) => {
+  const renderFields = () => {
+    // We can add switch case here based on type to support multiple types
+    return (
+      <div className="form-group">
+        <FloatingLabelInput
+          label={label}
+          number={type === QUESTION_TYPES_ENUM.NUMBER}
+          onChange={(val) => handleChange(index, val)}
+          error={error}
+          value={value}
+        />
+        {helperText ? <p>{`(${helperText})`}</p> : null}
+      </div>
+    );
   };
-  return <>{renderFields(type)}</>;
+
+  return <>{renderFields()}</>;
 };
 
 export default FormGroup;
