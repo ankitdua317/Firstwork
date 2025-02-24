@@ -5,7 +5,7 @@ import CustomCheckbox from "../../FormElements/Checkbox";
 import CollapsibleWrapper from "../../Collapse";
 import { NUMBER_TYPE, QUESTION_TYPES } from "../../../constants/common";
 import { FormBuilder, QUESTION_TYPES_ENUM } from "../../../models/FormBuilder";
-import { useAppContext } from "../../../hooks/useAppContext";
+import useBuilderContext from "../../../hooks/useBuilderContext";
 
 interface FormSectionProps extends FormBuilder {
   index: number;
@@ -18,7 +18,7 @@ const FormSection = ({
   required,
   hidden,
 }: FormSectionProps) => {
-  const { handleFormChange } = useAppContext();
+  const { handleFormChange } = useBuilderContext();
 
   return (
     <div className={styles.container}>

@@ -1,12 +1,12 @@
 import "./App.css";
 import FormBuilder from "./components/FormBuilder";
-import AppProvider from "./contexts/AppProvider";
+import BuilderProvider from "./providers/BuilderProvider";
 
 const App: React.FC = () => {
   return (
-    <AppProvider>
+    <BuilderProvider>
       <FormBuilder />
-    </AppProvider>
+    </BuilderProvider>
   );
 };
 

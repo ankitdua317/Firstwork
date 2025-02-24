@@ -4,10 +4,10 @@ import Button from "../FormElements/Button";
 import Modal from "../Modal";
 import FormRenderer from "../FormRenderer";
 import FormSection from "./FormSection";
-import { useAppContext } from "../../hooks/useAppContext";
+import useBuilderContext from "../../hooks/useBuilderContext";
 
 const FormBuilder: React.FC = () => {
-  const { formBuilderData, addNewQuestion } = useAppContext();
+  const { formBuilderData, addNewQuestion } = useBuilderContext();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (

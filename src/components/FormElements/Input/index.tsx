@@ -5,29 +5,25 @@ interface FloatingLabelInputProps {
   label: string;
   onChange: (value: string) => void;
   value?: string;
+  error?: string;
 }
 
 const FloatingLabelInput: React.FC<FloatingLabelInputProps> = ({
   label,
   onChange,
   value,
+  error,
 }) => {
   const [isFocused, setIsFocused] = useState(false);
-  const [hasValue, setHasValue] = useState(false);
+  const [hasValue, setHasValue] = useState(!!value);
 
   const handleChange = (val: string) => {
     onChange(val);
-    if (val) {
-      setHasValue(true);
-    } else {
-      setHasValue(false);
-    }
+    setHasValue(!!val);
   };
 
   useEffect(() => {
-    if (value) {
-      setHasValue(true);
-    }
+    setHasValue(!!value);
   }, [value]);
 
   return (
@@ -45,8 +41,9 @@ const FloatingLabelInput: React.FC<FloatingLabelInputProps> = ({
         onChange={(e) => handleChange(e.target.value)}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
-        className={styles.input}
+        className={`${styles.input} ${error ? styles.inputError : ""}`}
       />
+      {error && <p className={styles.errorText}>{error}</p>}{" "}
     </div>
   );
 };

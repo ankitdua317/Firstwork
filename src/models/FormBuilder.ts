@@ -17,3 +17,7 @@ export enum QUESTION_TYPES_ENUM {
   TEXT = "Text",
   PARAGRAPH = "Paragraph",
 }
+
+export interface ErrorState {
+  [key: number]: string | null;
+}

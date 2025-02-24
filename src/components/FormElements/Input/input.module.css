@@ -40,3 +40,13 @@
   color: #000;
   background: white;
 }
+
+.inputError {
+  border: 1px solid red !important;
+}
+
+.errorText {
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+}
