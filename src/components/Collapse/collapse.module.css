@@ -13,7 +13,7 @@
 }
 
 .toggleButton {
-  width: 100%;
+  background-color: #ddd;
   padding: 10px;
   font-size: 16px;
   font-weight: bold;
@@ -25,6 +25,6 @@
 }
 
 .content {
-  padding: 10px;
+  padding: 18px 12px;
   border-top: 1px solid #ddd;
 }

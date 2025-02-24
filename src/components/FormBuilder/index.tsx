@@ -5,10 +5,16 @@ import Modal from "../Modal";
 import FormRenderer from "../FormRenderer";
 import FormSection from "./FormSection";
 import useBuilderContext from "../../hooks/useBuilderContext";
+import Loader from "../Loader/Loader";
 
 const FormBuilder: React.FC = () => {
-  const { formBuilderData, addNewQuestion, isFormValid } = useBuilderContext();
+  const { formBuilderData, addNewQuestion, isFormValid, hasFetchedData } =
+    useBuilderContext();
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  if (!hasFetchedData) {
+    return <Loader />;
+  }
 
   return (
     <>

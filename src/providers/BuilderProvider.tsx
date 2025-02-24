@@ -113,7 +113,8 @@ export const BuilderProvider: React.FC<{ children: ReactNode }> = ({
 
   // Debounced Auto-Save Logic
   useEffect(() => {
-    if (!isFormValid || formBuilderData.length === 0) return;
+    if (!isFormValid || formBuilderData.length === 0 || !hasUserInteracted)
+      return;
 
     const timeout = setTimeout(() => {
       setIsSaving(true);
@@ -126,7 +127,7 @@ export const BuilderProvider: React.FC<{ children: ReactNode }> = ({
     }, 1000);
 
     return () => clearTimeout(timeout);
-  }, [formBuilderData, isFormValid]);
+  }, [formBuilderData, isFormValid, hasUserInteracted]);
 
   return (
     <BuilderContext.Provider

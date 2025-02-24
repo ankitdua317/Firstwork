@@ -30,23 +30,25 @@ const FloatingLabelInput: React.FC<FloatingLabelInputProps> = ({
   }, [value]);
 
   return (
-    <div className={styles.inputContainer}>
-      <label
-        className={`${styles.label} ${
-          isFocused || hasValue ? styles.active : ""
-        }`}
-      >
-        {label}
-      </label>
-      <input
-        type="text"
-        value={value ?? ""}
-        onChange={(e) => handleChange(e.target.value)}
-        onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
-        className={`${styles.input} ${error ? styles.inputError : ""}`}
-        inputMode={number ? "numeric" : "text"}
-      />
+    <div className="flex flex-column">
+      <div className={styles.inputContainer}>
+        <label
+          className={`${styles.label} ${
+            isFocused || hasValue ? styles.active : ""
+          }`}
+        >
+          {label}
+        </label>
+        <input
+          type="text"
+          value={value}
+          onChange={(e) => handleChange(e.target.value)}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
+          className={`${styles.input} ${error ? styles.inputError : ""}`}
+          inputMode={number ? "numeric" : "text"}
+        />
+      </div>
       {error && <p className={styles.errorText}>{error}</p>}
     </div>
   );

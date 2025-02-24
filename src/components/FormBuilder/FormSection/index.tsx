@@ -6,6 +6,7 @@ import CollapsibleWrapper from "../../Collapse";
 import { NUMBER_TYPE, QUESTION_TYPES } from "../../../constants/common";
 import { FormBuilder, QUESTION_TYPES_ENUM } from "../../../models/Form";
 import useBuilderContext from "../../../hooks/useBuilderContext";
+import AutoSaveLoader from "../../Loader/AutosaveLoader";
 
 interface FormSectionProps extends FormBuilder {
   index: number;
@@ -22,11 +23,11 @@ const FormSection = ({
   min,
   max,
 }: FormSectionProps) => {
-  const { handleFormChange, errors } = useBuilderContext();
+  const { handleFormChange, errors, isSaving } = useBuilderContext();
 
   return (
     <div className={styles.container}>
-      <CollapsibleWrapper title="Question Title *">
+      <CollapsibleWrapper question={quesTitle} title={"Question Title *"}>
         <div className={styles.header}>
           <FloatingLabelInput
             label="Question Title *"
@@ -34,6 +35,7 @@ const FormSection = ({
             onChange={(val) => handleFormChange(index, "quesTitle", val)}
             error={errors[index].quesTitle}
           />
+          {isSaving && <AutoSaveLoader isSaving={isSaving} />}
         </div>
         <div className={styles.formSection}>
           <CustomSelect

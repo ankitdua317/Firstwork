@@ -1,8 +1,9 @@
 import { useState } from "react";
-import FormGroup from "./Elements/FormGroup";
 import Button from "../FormElements/Button";
 import useBuilderContext from "../../hooks/useBuilderContext";
 import { IFormRenderer } from "../../models/Form";
+import FormGroup from "./FormGroup";
+import styles from "./render.module.css";
 
 const FormRenderer = () => {
   const { formBuilderData } = useBuilderContext();
@@ -22,8 +23,8 @@ const FormRenderer = () => {
 
   return (
     <div className="form">
-      <h1>My Form</h1>
-      <div className="form-body">
+      <h1 className={styles.mt0}>My Form</h1>
+      <div>
         {formData.map(
           ({ id, quesTitle, quesType, helperText, value }, index) => (
             <FormGroup
@@ -41,7 +42,7 @@ const FormRenderer = () => {
           )
         )}
       </div>
-      <div className="form-footer">
+      <div>
         <Button label="Submit" onClick={() => {}} />
       </div>
     </div>

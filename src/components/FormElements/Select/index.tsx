@@ -56,28 +56,39 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
   }, []);
 
   return (
-    <div
-      ref={dropdownRef}
-      className={styles.selectContainer}
-      onClick={() => setIsOpen(!isOpen)}
-      tabIndex={0}
-    >
-      <label className={`${styles.label} ${hasValue ? styles.active : ""}`}>
-        {label}
-      </label>
-      <div className={styles.selectedValue}>{dropdownValue}</div>
-      <div className={`${styles.dropdown} ${isOpen ? styles.show : ""}`}>
-        {options.map((option, index) => (
-          <div
-            key={index}
-            className={styles.option}
-            onClick={() => handleChange(option)}
-          >
-            {option}
+    <div className="flex flex-column">
+      <div
+        ref={dropdownRef}
+        className={`${styles.selectContainer} ${
+          error ? styles.inputError : ""
+        }`}
+        onClick={() => setIsOpen(!isOpen)}
+        tabIndex={0}
+      >
+        <div className="flex justify-between centered-flex">
+          <div>
+            <label
+              className={`${styles.label} ${hasValue ? styles.active : ""}`}
+            >
+              {label}
+            </label>
+            <div className={styles.selectedValue}>{dropdownValue}</div>
           </div>
-        ))}
+          <span className={`${isOpen ? "chevron-up" : "chevron-down"}`} />
+        </div>
+        <div className={`${styles.dropdown} ${isOpen ? styles.show : ""}`}>
+          {options.map((option, index) => (
+            <div
+              key={index}
+              className={styles.option}
+              onClick={() => handleChange(option)}
+            >
+              {option}
+            </div>
+          ))}
+        </div>
       </div>
-      {error && <p>{error}</p>}
+      {error && <p className={styles.errorText}>{error}</p>}
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import React from "react";
-import FloatingLabelInput from "../../FormElements/Input";
-import { QUESTION_TYPES_ENUM } from "../../../models/Form";
+import { QUESTION_TYPES_ENUM } from "../../models/Form";
+import FloatingLabelInput from "../FormElements/Input";
+import styles from "./render.module.css";
 
 interface FormGroupProps {
   id: number;
@@ -33,7 +34,7 @@ const FormGroup: React.FC<FormGroupProps> = ({
           error={error}
           value={value}
         />
-        {helperText ? <p>{`(${helperText})`}</p> : null}
+        {helperText ? <p className={styles.m4}>{`(${helperText})`}</p> : null}
       </div>
     );
   };

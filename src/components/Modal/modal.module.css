@@ -16,7 +16,7 @@
 .modalContent {
   position: relative;
   background: white;
-  padding: 20px;
+  padding: 35px 15px 15px;
   border-radius: 8px;
   width: 90%;
   max-width: 500px; /* Max width to leave space on sides */
