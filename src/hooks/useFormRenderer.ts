@@ -1,7 +1,7 @@
 import { useState } from "react";
 import useBuilderContext from "./useBuilderContext";
 import { IFormRenderer } from "../models/Form";
-import { NON_EMPTY_FIELD } from "../constants/errors";
+import { LESS_ERROR, MORE_ERROR, NON_EMPTY_FIELD } from "../constants/errors";
 
 const useFormRender = () => {
   const { formBuilderData } = useBuilderContext();
@@ -11,6 +11,7 @@ const useFormRender = () => {
   const [errors, setErrors] = useState<{ [key: number]: string }>({});
 
   const handleChange = (index: number, value: string) => {
+    const { required, min, max } = formData[index];
     setFormData((prev) => {
       const updatedData = [...prev];
       if (updatedData[index]) {
@@ -19,15 +20,22 @@ const useFormRender = () => {
       return updatedData;
     });
 
-    if (formData[index].required) {
-      validateField(index, value);
+    let errorMsg = value ? "" : NON_EMPTY_FIELD;
+    if (required) {
+      if (min && value && Number(value) < Number(min)) {
+        errorMsg = `${LESS_ERROR}${min}`;
+      }
+      if (max && value && Number(value) > Number(max)) {
+        errorMsg = `${MORE_ERROR}${max}`;
+      }
     }
+    validateField(index, errorMsg);
   };
 
-  const validateField = (index: number, value: string | number | boolean) => {
+  const validateField = (index: number, err: string) => {
     setErrors({
       ...errors,
-      [index]: value ? "" : NON_EMPTY_FIELD,
+      [index]: err,
     });
   };
 
@@ -37,7 +45,7 @@ const useFormRender = () => {
       if (required && !value) {
         currentErrors[index] = NON_EMPTY_FIELD;
       } else {
-        delete currentErrors[index];
+        if (value) delete currentErrors[index];
       }
     });
 

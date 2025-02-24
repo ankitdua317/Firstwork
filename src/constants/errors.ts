@@ -4,3 +4,5 @@ export const NUMBER_TYPE_REQD = "Number Type is required";
 export const NON_EMPTY_FIELD = "This field can't be empty";
 export const MIN_ERROR = "Min should be less than max";
 export const MAX_ERROR = "Max should be more than min";
+export const LESS_ERROR = "Value can't be less than : ";
+export const MORE_ERROR = "Value can't be more than : ";
