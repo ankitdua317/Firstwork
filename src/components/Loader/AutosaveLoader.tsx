@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./AutosaveLoader.module.css";
 import useBuilderContext from "../../hooks/useBuilderContext";
 
-const AutoSaveLoader: React.FC = () => {
+const AutosaveLoader: React.FC = () => {
   const { isSaving } = useBuilderContext();
   const [loading, setLoading] = useState(false);
 
@@ -29,4 +29,4 @@ const AutoSaveLoader: React.FC = () => {
   );
 };
 
-export default AutoSaveLoader;
+export default AutosaveLoader;

@@ -6,7 +6,7 @@ import CollapsibleWrapper from "../../Collapse";
 import { NUMBER_TYPE, QUESTION_TYPES } from "../../../constants/common";
 import { FormBuilder, QUESTION_TYPES_ENUM } from "../../../models/Form";
 import useBuilderContext from "../../../hooks/useBuilderContext";
-import AutoSaveLoader from "../../Loader/AutosaveLoader";
+import AutosaveLoader from "../../Loader/AutosaveLoader";
 
 interface FormSectionProps extends FormBuilder {
   index: number;
@@ -27,7 +27,7 @@ const FormSection = ({
 
   return (
     <div className={styles.container}>
-      <AutoSaveLoader />
+      <AutosaveLoader />
       <CollapsibleWrapper
         question={quesTitle}
         title={"Question Title *"}
