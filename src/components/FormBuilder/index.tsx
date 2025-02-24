@@ -12,8 +12,8 @@ const FormBuilder: React.FC = () => {
 
   return (
     <>
-      {formBuilderData.map((item) => (
-        <FormSection key={item.id} {...item} />
+      {formBuilderData.map((item, index) => (
+        <FormSection key={item.id} index={index} {...item} />
       ))}
       <div className={styles.controlBtns}>
         <Button label="Add Questions" icon="+" onClick={addNewQuestion} />

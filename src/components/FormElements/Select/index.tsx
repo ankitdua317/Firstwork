@@ -4,20 +4,23 @@ import styles from "./select.module.css";
 interface CustomSelectProps {
   label: string;
   options: string[];
+  onChange: (value: string) => void;
   value?: string | number;
 }
 
 const CustomSelect: React.FC<CustomSelectProps> = ({
   label,
   options,
+  onChange,
   value,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [hasValue, setHasValue] = useState(false);
-  const [dropdownValue, setDropdownValue] = useState<string | number>();
+  const [dropdownValue, setDropdownValue] = useState<string>();
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const handleChange = (val: string | number) => {
+  const handleChange = (val: string) => {
+    onChange(val);
     if (val) {
       setHasValue(true);
       setDropdownValue(val);

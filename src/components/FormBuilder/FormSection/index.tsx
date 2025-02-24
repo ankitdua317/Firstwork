@@ -3,52 +3,84 @@ import FloatingLabelInput from "../../FormElements/Input";
 import CustomSelect from "../../FormElements/Select";
 import CustomCheckbox from "../../FormElements/Checkbox";
 import CollapsibleWrapper from "../../Collapse";
-import { QUESTION_TYPES } from "../../../constants/common";
-import { FormBuilder } from "../../../models/FormBuilder";
+import { NUMBER_TYPE, QUESTION_TYPES } from "../../../constants/common";
+import { FormBuilder, QUESTION_TYPES_ENUM } from "../../../models/FormBuilder";
+import { useAppContext } from "../../../hooks/useAppContext";
 
-const FormSection = ({ quesTitle, quesType, requied, hidden }: FormBuilder) => {
+interface FormSectionProps extends FormBuilder {
+  index: number;
+}
+
+const FormSection = ({
+  index,
+  quesTitle,
+  quesType,
+  required,
+  hidden,
+}: FormSectionProps) => {
+  const { handleFormChange } = useAppContext();
+
   return (
     <div className={styles.container}>
       <CollapsibleWrapper title="Question Title *">
         <div className={styles.header}>
-          <FloatingLabelInput label="Question Title *" value={quesTitle} />
+          <FloatingLabelInput
+            label="Question Title *"
+            value={quesTitle}
+            onChange={(val) => handleFormChange(index, "quesTitle", val)}
+          />
         </div>
         <div className={`${styles.formSection}`}>
           <CustomSelect
             label="Question Type *"
             options={QUESTION_TYPES}
             value={quesType}
+            onChange={(val) => handleFormChange(index, "quesType", val)}
           />
           <div className={styles.checkboxGroup}>
             <CustomCheckbox
               label="Required"
-              checked={!!requied}
-              onChange={() => {}}
+              checked={!!required}
+              onChange={(val) => handleFormChange(index, "required", val)}
             />
             <CustomCheckbox
               label="Hidden"
               checked={!!hidden}
-              onChange={() => {}}
+              onChange={(val) => handleFormChange(index, "hidden", val)}
             />
           </div>
         </div>
         <br />
-        <div>
-          <FloatingLabelInput label="Helper text" />
-          <p className={styles.subText}>Additional instructions (optional)</p>
+        <FloatingLabelInput
+          label="Helper text"
+          onChange={(val) => handleFormChange(index, "helperText", val)}
+        />
+        <p className={styles.subText}>Additional instructions (optional)</p>
+        {quesType === QUESTION_TYPES_ENUM.NUMBER ? (
           <div>
             <div className={`${styles.formSection} ${styles.layout}`}>
               <CustomSelect
                 label="Number Type *"
-                options={["Integer", "Float"]}
+                options={NUMBER_TYPE}
+                onChange={(val) => handleFormChange(index, "numberType", val)}
               />
               <div className={`${styles.formSection} ${styles.miniFields} m-0`}>
-                <FloatingLabelInput label="Min" />
-                <FloatingLabelInput label="Max" />
+                <FloatingLabelInput
+                  label="Min"
+                  onChange={(val) =>
+                    handleFormChange(index, "min", Number(val))
+                  }
+                />
+                <FloatingLabelInput
+                  label="Max"
+                  onChange={(val) =>
+                    handleFormChange(index, "max", Number(val))
+                  }
+                />
               </div>
             </div>
           </div>
-        </div>
+        ) : null}
       </CollapsibleWrapper>
     </div>
   );

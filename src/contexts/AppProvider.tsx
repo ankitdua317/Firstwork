@@ -1,6 +1,6 @@
 import React, { useState, ReactNode } from "react";
 import { AppContext } from "./AppContext";
-import { FormBuilder, INIT_STATE } from "../models/FormBuilder";
+import { FormBuilder } from "../models/FormBuilder";
 
 export const AppProvider: React.FC<{ children: ReactNode }> = ({
   children,
@@ -10,12 +10,28 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
   const addNewQuestion = () => {
     setFormBuilderData((prev) => [
       ...(prev || []),
-      { ...INIT_STATE, id: new Date().getTime() },
+      { id: new Date().getTime() },
     ]);
   };
 
+  const handleFormChange = (
+    index: number,
+    key: keyof FormBuilder,
+    value: string | number | boolean
+  ) => {
+    setFormBuilderData((prev) => {
+      const updatedData = [...prev];
+      if (updatedData[index]) {
+        updatedData[index] = { ...updatedData[index], [key]: value };
+      }
+      return updatedData;
+    });
+  };
+
   return (
-    <AppContext.Provider value={{ formBuilderData, addNewQuestion }}>
+    <AppContext.Provider
+      value={{ formBuilderData, addNewQuestion, handleFormChange }}
+    >
       {children}
     </AppContext.Provider>
   );

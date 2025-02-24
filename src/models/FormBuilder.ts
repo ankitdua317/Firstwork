@@ -1,16 +1,19 @@
-export interface FormBuilder {
+export interface IFormBuilder {
   id: number;
   quesTitle: string;
-  quesType: string;
-  requied?: boolean;
-  hidden?: boolean;
-  helperText?: string;
-  numberType?: string;
-  min?: number;
-  max?: number;
+  quesType: QUESTION_TYPES_ENUM;
+  required: boolean;
+  hidden: boolean;
+  helperText: string;
+  numberType: string;
+  min: number;
+  max: number;
 }
 
-export const INIT_STATE = {
-  quesTitle: "",
-  quesType: "",
-};
+export type FormBuilder = Partial<IFormBuilder>;
+
+export enum QUESTION_TYPES_ENUM {
+  NUMBER = "Number",
+  TEXT = "Text",
+  PARAGRAPH = "Paragraph",
+}

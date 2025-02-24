@@ -3,17 +3,20 @@ import styles from "./input.module.css";
 
 interface FloatingLabelInputProps {
   label: string;
+  onChange: (value: string) => void;
   value?: string;
 }
 
 const FloatingLabelInput: React.FC<FloatingLabelInputProps> = ({
   label,
+  onChange,
   value,
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [hasValue, setHasValue] = useState(false);
 
-  const handleChange = (val: string | number) => {
+  const handleChange = (val: string) => {
+    onChange(val);
     if (val) {
       setHasValue(true);
     } else {
