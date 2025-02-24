@@ -7,7 +7,7 @@ import FormSection from "./FormSection";
 import useBuilderContext from "../../hooks/useBuilderContext";
 
 const FormBuilder: React.FC = () => {
-  const { formBuilderData, addNewQuestion } = useBuilderContext();
+  const { formBuilderData, addNewQuestion, isFormValid } = useBuilderContext();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
@@ -15,9 +15,11 @@ const FormBuilder: React.FC = () => {
       {formBuilderData.map((item, index) => (
         <FormSection key={item.id} index={index} {...item} />
       ))}
-      <div className={styles.controlBtns}>
-        <Button label="Add Questions" icon="+" onClick={addNewQuestion} />
-      </div>
+      {isFormValid && (
+        <div className={styles.controlBtns}>
+          <Button label="Add Questions" icon="+" onClick={addNewQuestion} />
+        </div>
+      )}
 
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <FormRenderer />

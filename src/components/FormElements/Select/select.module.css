@@ -1,7 +1,7 @@
 .selectContainer {
   position: relative;
   width: 100%;
-  max-width: 100%; /* Prevents overflow */
+  max-width: 100%;
   cursor: pointer;
   border: 1px solid #ddd;
   border-radius: 4px;
@@ -10,7 +10,7 @@
   outline: none;
   padding: 12px 10px;
   height: 45px;
-  box-sizing: border-box; /* Ensures width includes padding */
+  box-sizing: border-box;
 }
 
 .label {
@@ -22,7 +22,7 @@
   color: #999;
   transition: all 0.3s ease;
   background: white;
-  pointer-events: none; /* Prevents interfering with clicks */
+  pointer-events: none;
 }
 
 .active {
@@ -72,7 +72,6 @@
   color: white;
 }
 
-/* Mobile Adjustments */
 @media (max-width: 768px) {
   .selectContainer {
     font-size: 14px;

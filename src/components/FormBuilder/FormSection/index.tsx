@@ -17,8 +17,12 @@ const FormSection = ({
   quesType,
   required,
   hidden,
+  helperText,
+  numberType,
+  min,
+  max,
 }: FormSectionProps) => {
-  const { handleFormChange } = useBuilderContext();
+  const { handleFormChange, errors } = useBuilderContext();
 
   return (
     <div className={styles.container}>
@@ -28,14 +32,16 @@ const FormSection = ({
             label="Question Title *"
             value={quesTitle}
             onChange={(val) => handleFormChange(index, "quesTitle", val)}
+            error={errors[index].quesTitle}
           />
         </div>
-        <div className={`${styles.formSection}`}>
+        <div className={styles.formSection}>
           <CustomSelect
             label="Question Type *"
             options={QUESTION_TYPES}
             value={quesType}
             onChange={(val) => handleFormChange(index, "quesType", val)}
+            error={errors[index].quesType}
           />
           <div className={styles.checkboxGroup}>
             <CustomCheckbox
@@ -53,6 +59,7 @@ const FormSection = ({
         <br />
         <FloatingLabelInput
           label="Helper text"
+          value={helperText}
           onChange={(val) => handleFormChange(index, "helperText", val)}
         />
         <p className={styles.subText}>Additional instructions (optional)</p>
@@ -62,20 +69,22 @@ const FormSection = ({
               <CustomSelect
                 label="Number Type *"
                 options={NUMBER_TYPE}
+                value={numberType}
                 onChange={(val) => handleFormChange(index, "numberType", val)}
+                error={errors[index].numberType}
               />
               <div className={`${styles.formSection} ${styles.miniFields} m-0`}>
                 <FloatingLabelInput
                   label="Min"
-                  onChange={(val) =>
-                    handleFormChange(index, "min", Number(val))
-                  }
+                  value={min}
+                  onChange={(val) => handleFormChange(index, "min", val)}
+                  number
                 />
                 <FloatingLabelInput
                   label="Max"
-                  onChange={(val) =>
-                    handleFormChange(index, "max", Number(val))
-                  }
+                  value={max}
+                  onChange={(val) => handleFormChange(index, "max", val)}
+                  number
                 />
               </div>
             </div>

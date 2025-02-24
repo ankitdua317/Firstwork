@@ -3,7 +3,7 @@ import { ErrorState, FormBuilder } from "../models/FormBuilder";
 
 interface BuilderContextProps {
   formBuilderData: FormBuilder[];
-  errors: ErrorState;
+  errors: ErrorState[];
   addNewQuestion: () => void;
   handleFormChange: (
     index: number,

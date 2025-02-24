@@ -6,6 +6,7 @@ interface CustomSelectProps {
   options: string[];
   onChange: (value: string) => void;
   value?: string | number;
+  error?: string | null;
 }
 
 const CustomSelect: React.FC<CustomSelectProps> = ({
@@ -13,6 +14,7 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
   options,
   onChange,
   value,
+  error,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [hasValue, setHasValue] = useState(false);
@@ -74,6 +76,7 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
           </div>
         ))}
       </div>
+      {error && <p>{error}</p>}
     </div>
   );
 };

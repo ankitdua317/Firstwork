@@ -6,8 +6,8 @@ export interface IFormBuilder {
   hidden: boolean;
   helperText: string;
   numberType: string;
-  min: number;
-  max: number;
+  min: string;
+  max: string;
 }
 
 export type FormBuilder = Partial<IFormBuilder>;
@@ -15,9 +15,6 @@ export type FormBuilder = Partial<IFormBuilder>;
 export enum QUESTION_TYPES_ENUM {
   NUMBER = "Number",
   TEXT = "Text",
-  PARAGRAPH = "Paragraph",
 }
 
-export interface ErrorState {
-  [key: number]: string | null;
-}
+export type ErrorState = Partial<Record<keyof IFormBuilder, string | null>>;

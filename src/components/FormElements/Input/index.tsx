@@ -5,7 +5,8 @@ interface FloatingLabelInputProps {
   label: string;
   onChange: (value: string) => void;
   value?: string;
-  error?: string;
+  error?: string | null;
+  number?: boolean;
 }
 
 const FloatingLabelInput: React.FC<FloatingLabelInputProps> = ({
@@ -13,11 +14,13 @@ const FloatingLabelInput: React.FC<FloatingLabelInputProps> = ({
   onChange,
   value,
   error,
+  number = false,
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [hasValue, setHasValue] = useState(!!value);
 
   const handleChange = (val: string) => {
+    if (number && !/^\d*$/.test(val)) return;
     onChange(val);
     setHasValue(!!val);
   };
@@ -37,13 +40,14 @@ const FloatingLabelInput: React.FC<FloatingLabelInputProps> = ({
       </label>
       <input
         type="text"
-        value={value}
+        value={value ?? ""}
         onChange={(e) => handleChange(e.target.value)}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
         className={`${styles.input} ${error ? styles.inputError : ""}`}
+        inputMode={number ? "numeric" : "text"}
       />
-      {error && <p className={styles.errorText}>{error}</p>}{" "}
+      {error && <p className={styles.errorText}>{error}</p>}
     </div>
   );
 };
