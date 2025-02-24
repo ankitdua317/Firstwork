@@ -14,6 +14,7 @@ interface BuilderContextProps {
   isSaving: boolean;
   hasFetchedData: boolean;
   hasUserInteracted: boolean;
+  deleteQuestion: (index: number) => void;
 }
 
 export const BuilderContext = createContext<BuilderContextProps | undefined>(

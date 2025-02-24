@@ -32,7 +32,7 @@ const FormGroup: React.FC<FormGroupProps> = ({
           number={type === QUESTION_TYPES_ENUM.NUMBER}
           onChange={(val) => handleChange(index, val)}
           error={error}
-          value={value}
+          value={value ?? ""}
         />
         {helperText ? <p className={styles.m4}>{`(${helperText})`}</p> : null}
       </div>

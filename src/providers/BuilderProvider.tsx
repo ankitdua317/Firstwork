@@ -30,6 +30,12 @@ export const BuilderProvider: React.FC<{ children: ReactNode }> = ({
     ]);
   };
 
+  const deleteQuestion = (index: number) => {
+    setFormBuilderData(formBuilderData.filter((_, i) => i !== index));
+    setErrors(errors.filter((_, i) => i !== index));
+    setHasUserInteracted(true);
+  };
+
   const validateField = (
     index: number,
     key: keyof FormBuilder,
@@ -140,6 +146,7 @@ export const BuilderProvider: React.FC<{ children: ReactNode }> = ({
         isSaving,
         hasFetchedData,
         hasUserInteracted,
+        deleteQuestion,
       }}
     >
       {children}

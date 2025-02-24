@@ -1,50 +1,34 @@
 import { useState } from "react";
-import Button from "../FormElements/Button";
-import useBuilderContext from "../../hooks/useBuilderContext";
-import { IFormRenderer } from "../../models/Form";
-import FormGroup from "./FormGroup";
-import styles from "./render.module.css";
+import AnswerForm from "./AnswerForm";
+import QuestionForm from "./QuestionForm";
+import useFormRender from "../../hooks/useFormRenderer";
 
 const FormRenderer = () => {
-  const { formBuilderData } = useBuilderContext();
-  const [formData, setFormData] = useState<IFormRenderer[]>(
-    formBuilderData.filter((item) => !item.hidden)
-  );
+  const { formData, errors, validateForm, handleChange } = useFormRender();
+  const [showSubmittedForm, setShowSubmittedForm] = useState(false);
 
-  const handleChange = (index: number, value: string) => {
-    setFormData((prev) => {
-      const updatedData = [...prev];
-      if (updatedData[index]) {
-        updatedData[index] = { ...updatedData[index], value };
-      }
-      return updatedData;
-    });
+  const toggleForm = () => {
+    setShowSubmittedForm(true);
+  };
+
+  const handleSubmit = () => {
+    if (!validateForm()) {
+      toggleForm();
+    }
   };
 
   return (
     <div className="form">
-      <h1 className={styles.mt0}>My Form</h1>
-      <div>
-        {formData.map(
-          ({ id, quesTitle, quesType, helperText, value }, index) => (
-            <FormGroup
-              key={id}
-              index={index}
-              id={id!}
-              label={quesTitle!}
-              type={quesType!}
-              // TODO
-              error={index ? "Error" : ""}
-              helperText={helperText}
-              handleChange={handleChange}
-              value={value}
-            />
-          )
-        )}
-      </div>
-      <div>
-        <Button label="Submit" onClick={() => {}} />
-      </div>
+      {showSubmittedForm ? (
+        <AnswerForm formData={formData} />
+      ) : (
+        <QuestionForm
+          handleSubmit={handleSubmit}
+          errors={errors}
+          handleChange={handleChange}
+          formData={formData}
+        />
+      )}
     </div>
   );
 };

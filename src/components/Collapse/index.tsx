@@ -5,12 +5,14 @@ interface CollapsibleWrapperProps {
   question?: string;
   title: string;
   children: React.ReactNode;
+  rightChild: React.ReactNode;
 }
 
 const CollapsibleWrapper: React.FC<CollapsibleWrapperProps> = ({
   question,
   title,
   children,
+  rightChild,
 }) => {
   const [isOpen, setIsOpen] = useState(true);
 
@@ -19,7 +21,7 @@ const CollapsibleWrapper: React.FC<CollapsibleWrapperProps> = ({
       <div className={styles.toggleButton} onClick={() => setIsOpen(!isOpen)}>
         {!isOpen ? question : title}
         <div>
-          <button className={styles.deleteButton}>🗑</button>
+          {rightChild}
           {isOpen ? "▼" : "▶"}
         </div>
       </div>

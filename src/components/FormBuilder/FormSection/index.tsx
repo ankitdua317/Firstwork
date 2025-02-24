@@ -23,11 +23,23 @@ const FormSection = ({
   min,
   max,
 }: FormSectionProps) => {
-  const { handleFormChange, errors, isSaving } = useBuilderContext();
+  const { handleFormChange, errors, isSaving, deleteQuestion } =
+    useBuilderContext();
 
   return (
     <div className={styles.container}>
-      <CollapsibleWrapper question={quesTitle} title={"Question Title *"}>
+      <CollapsibleWrapper
+        question={quesTitle}
+        title={"Question Title *"}
+        rightChild={
+          <button
+            className={styles.deleteButton}
+            onClick={() => deleteQuestion(index)}
+          >
+            🗑
+          </button>
+        }
+      >
         <div className={styles.header}>
           <FloatingLabelInput
             label="Question Title *"
