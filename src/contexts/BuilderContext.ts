@@ -11,6 +11,7 @@ interface BuilderContextProps {
     value: string | number | boolean
   ) => void;
   isFormValid: boolean;
+  isSaving: boolean;
 }
 
 export const BuilderContext = createContext<BuilderContextProps | undefined>(

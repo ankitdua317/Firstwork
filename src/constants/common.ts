@@ -1,3 +1,3 @@
-export const QUESTION_TYPES = ["Number", "Text"];
+export const QUESTION_TYPES = ["Text", "Number"];
 
 export const NUMBER_TYPE = ["Age", "Integer"];

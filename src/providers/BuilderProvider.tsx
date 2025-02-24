@@ -1,4 +1,4 @@
-import React, { useState, ReactNode } from "react";
+import React, { useState, ReactNode, useEffect } from "react";
 import { BuilderContext } from "../contexts/BuilderContext";
 import {
   ErrorState,
@@ -10,12 +10,17 @@ import {
   QUES_TITLE_REQD,
   QUES_TYPE_REQD,
 } from "../constants/errors";
+import addQuestions from "../api/addQuestions";
+import fetchQuestions from "../api/fetchQuestions";
 
 export const BuilderProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [formBuilderData, setFormBuilderData] = useState<FormBuilder[]>([]);
   const [errors, setErrors] = useState<ErrorState[]>([]);
+  const [isSaving, setIsSaving] = useState(false);
+  const [hasFetchedData, setHasFetchedData] = useState(false);
+  const [hasUserInteracted, setHasUserInteracted] = useState(false);
 
   const isFormValid = errors.every((error) =>
     Object.values(error).every((msg) => msg === null)
@@ -82,6 +87,7 @@ export const BuilderProvider: React.FC<{ children: ReactNode }> = ({
     key: keyof FormBuilder,
     value: string | number | boolean
   ) => {
+    setHasUserInteracted(true);
     setFormBuilderData((prev) => {
       const updatedData = [...prev];
       if (updatedData[index]) {
@@ -98,6 +104,34 @@ export const BuilderProvider: React.FC<{ children: ReactNode }> = ({
     validateField(index, key, value);
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await fetchQuestions();
+      setFormBuilderData(data);
+      setErrors(new Array(data.length).fill({}));
+      setHasFetchedData(true);
+    };
+
+    fetchData();
+  }, []);
+
+  // Debounced Auto-Save Logic
+  useEffect(() => {
+    if (!isFormValid || formBuilderData.length === 0) return;
+
+    const timeout = setTimeout(() => {
+      setIsSaving(true);
+      addQuestions(formBuilderData)
+        .then(() => {
+          console.log("Auto-saved successfully!");
+        })
+        .catch((err) => console.error("Auto-save failed:", err))
+        .finally(() => setIsSaving(false));
+    }, 1000);
+
+    return () => clearTimeout(timeout);
+  }, [formBuilderData, isFormValid]);
+
   return (
     <BuilderContext.Provider
       value={{
@@ -106,6 +140,7 @@ export const BuilderProvider: React.FC<{ children: ReactNode }> = ({
         handleFormChange,
         errors,
         isFormValid,
+        isSaving,
       }}
     >
       {children}

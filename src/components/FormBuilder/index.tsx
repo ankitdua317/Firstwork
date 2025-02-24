@@ -18,6 +18,9 @@ const FormBuilder: React.FC = () => {
       {isFormValid && (
         <div className={styles.controlBtns}>
           <Button label="Add Questions" icon="+" onClick={addNewQuestion} />
+          {formBuilderData.length > 0 ? (
+            <Button label="Build Form" onClick={() => setIsModalOpen(true)} />
+          ) : null}
         </div>
       )}
 

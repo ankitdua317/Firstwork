@@ -5,7 +5,7 @@ interface CustomSelectProps {
   label: string;
   options: string[];
   onChange: (value: string) => void;
-  value?: string | number;
+  value?: string;
   error?: string | null;
 }
 
@@ -34,6 +34,7 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
   useEffect(() => {
     if (value) {
       setHasValue(true);
+      setDropdownValue(value);
     }
   }, [value]);
 
