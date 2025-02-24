@@ -41,7 +41,7 @@ const FloatingLabelInput: React.FC<FloatingLabelInputProps> = ({
         </label>
         <input
           type="text"
-          value={value}
+          value={value ?? ""}
           onChange={(e) => handleChange(e.target.value)}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}

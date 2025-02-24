@@ -92,12 +92,14 @@ const FormSection = ({
                   value={min}
                   onChange={(val) => handleFormChange(index, "min", val)}
                   number
+                  error={errors[index].min}
                 />
                 <FloatingLabelInput
                   label="Max"
                   value={max}
                   onChange={(val) => handleFormChange(index, "max", val)}
                   number
+                  error={errors[index].max}
                 />
               </div>
             </div>

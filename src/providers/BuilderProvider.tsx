@@ -2,6 +2,8 @@ import React, { useState, ReactNode, useEffect } from "react";
 import { BuilderContext } from "../contexts/BuilderContext";
 import { ErrorState, FormBuilder, QUESTION_TYPES_ENUM } from "../models/Form";
 import {
+  MAX_ERROR,
+  MIN_ERROR,
   NUMBER_TYPE_REQD,
   QUES_TITLE_REQD,
   QUES_TYPE_REQD,
@@ -72,9 +74,23 @@ export const BuilderProvider: React.FC<{ children: ReactNode }> = ({
 
       if (key === "numberType") {
         fieldErrors[key] = null;
+      }
 
-        if (value === QUESTION_TYPES_ENUM.NUMBER) {
-          fieldErrors.numberType = NUMBER_TYPE_REQD;
+      if (key === "min") {
+        const max = formBuilderData[index].max;
+        if (max && value && Number(value) >= Number(max)) {
+          fieldErrors[key] = MIN_ERROR;
+        } else {
+          fieldErrors[key] = null;
+        }
+      }
+
+      if (key === "max") {
+        const min = formBuilderData[index].min;
+        if (min && value && Number(value) <= Number(min)) {
+          fieldErrors[key] = MAX_ERROR;
+        } else {
+          fieldErrors[key] = null;
         }
       }
 

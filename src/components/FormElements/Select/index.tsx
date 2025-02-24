@@ -22,12 +22,14 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const handleChange = (val: string) => {
-    onChange(val);
-    if (val) {
-      setHasValue(true);
-      setDropdownValue(val);
-    } else {
-      setHasValue(false);
+    if (value !== val) {
+      onChange(val);
+      if (val) {
+        setHasValue(true);
+        setDropdownValue(val);
+      } else {
+        setHasValue(false);
+      }
     }
   };
 
