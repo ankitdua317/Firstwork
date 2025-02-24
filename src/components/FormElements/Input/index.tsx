@@ -2,13 +2,11 @@ import { useEffect, useState } from "react";
 import styles from "./input.module.css";
 
 interface FloatingLabelInputProps {
-  id: string;
   label: string;
   value?: string;
 }
 
 const FloatingLabelInput: React.FC<FloatingLabelInputProps> = ({
-  id,
   label,
   value,
 }) => {
@@ -39,7 +37,6 @@ const FloatingLabelInput: React.FC<FloatingLabelInputProps> = ({
         {label}
       </label>
       <input
-        id={id}
         type="text"
         value={value}
         onChange={(e) => handleChange(e.target.value)}

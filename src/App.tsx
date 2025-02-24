@@ -1,14 +1,12 @@
 import "./App.css";
-import QuestionForm from "./components/FormBuilder";
-import FormRenderer from "./components/FormRenderer";
+import FormBuilder from "./components/FormBuilder";
+import AppProvider from "./contexts/AppProvider";
 
 const App: React.FC = () => {
   return (
-    <>
-      <QuestionForm />
-      <hr />
-      <FormRenderer />
-    </>
+    <AppProvider>
+      <FormBuilder />
+    </AppProvider>
   );
 };
 

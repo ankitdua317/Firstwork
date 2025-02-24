@@ -9,7 +9,7 @@ interface FormGroupProps {
   type: string;
 }
 
-const FormGroup: React.FC<FormGroupProps> = ({ label, type, id }) => {
+const FormGroup: React.FC<FormGroupProps> = ({ label, type }) => {
   const renderFields = (type: string) => {
     switch (type) {
       case "checkbox":
@@ -31,7 +31,7 @@ const FormGroup: React.FC<FormGroupProps> = ({ label, type, id }) => {
       default:
         return (
           <div className="form-group">
-            <FloatingLabelInput label={label} id={id} />
+            <FloatingLabelInput label={label} />
           </div>
         );
     }
